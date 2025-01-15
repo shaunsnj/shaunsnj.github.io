@@ -2,6 +2,11 @@
 
 html, body { background: #333 url("https://codepen.io/images/classy_fabric.png"); }
 
+.title{
+  align-content: center;
+  background-color: #FFFFFF;
+}
+
 .slides {
     padding: 0;
     width: 609px;
