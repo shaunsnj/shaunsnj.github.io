@@ -1,1 +1,45 @@
-Test to see if extra pages work fine.
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restricted App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { 
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        iframe {
+            border: none;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- Replace YOUR_URL_HERE with your target webpage -->
+    <iframe src="YOUR_URL_HERE" id="secureFrame"></iframe>
+
+    <script>
+        // Block external navigation attempts
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && e.target.href) {
+                e.preventDefault(); // Block all link clicks
+            }
+        });
+
+        // Prevent context menu (right-click)
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        // Block iframe navigation to external sites
+        const frame = document.getElementById('secureFrame');
+        frame.addEventListener('load', () => {
+            try {
+                if (!frame.contentWindow.location.href.startsWith("YOUR_URL_HERE")) {
+                    frame.src = "YOUR_URL_HERE"; // Reset if URL changes
+                }
+            } catch (e) { /* Security errors ignored */ }
+        });
+    </script>
+</body>
+</html>
